@@ -1,40 +1,66 @@
-# Currency Converter — Task 4
+# 💱 Currency Converter
 
-A simple Java HTTP server with a minimal HTML/CSS/JS frontend.
-Real-time exchange rates are fetched from https://open.er-api.com (free, no API key required).
+A Java Swing desktop application that converts currencies using live exchange rates.  
+Opens as a **native desktop window** — not a browser, not localhost.
+
+---
+
+## What It Does
+
+- Convert between 40+ world currencies (USD, EUR, INR, GBP, JPY and more)
+- Fetches real-time rates from the free Frankfurter API (European Central Bank)
+- Swap button to instantly reverse the currency pair
+- Input validation and clear error messages
+- No API key required · No external libraries · 100% pure Java
+
+---
+
+## How to Run
+
+### In VS Code
+1. Install **Extension Pack for Java** from the Extensions panel
+2. Open the `CurrencyConverter_Fixed` folder → `File → Open Folder`
+3. Open `src/main/java/com/currencyconverter/Main.java`
+4. Click **Run** above the `main` method
+
+### In Terminal
+```bash
+cd CurrencyConverter_Fixed
+mkdir out
+javac -d out src\main\java\com\currencyconverter\models\Currency.java src\main\java\com\currencyconverter\models\ConversionResult.java src\main\java\com\currencyconverter\utils\FormatUtils.java src\main\java\com\currencyconverter\utils\CurrencyData.java src\main\java\com\currencyconverter\services\ExchangeRateService.java src\main\java\com\currencyconverter\ui\ConverterPanel.java src\main\java\com\currencyconverter\ui\MainFrame.java src\main\java\com\currencyconverter\Main.java
+java -cp out com.currencyconverter.Main
+```
+
+---
 
 ## Requirements
-- Java 11 or higher (uses `com.sun.net.httpserver`)
 
-## Build & Run
+- JDK 11 or higher — download free from [adoptium.net](https://adoptium.net)
+- Internet connection (for live rates)
 
-```bash
-chmod +x build.sh
-./build.sh
-java -jar CurrencyConverter.jar
-```
-
-Then open **http://localhost:8080** in your browser.
+---
 
 ## Project Structure
+
 ```
-currency_converter/
-├── build.sh
-├── README.md
-└── src/
-    └── main/
-        ├── java/com/currency/
-        │   └── CurrencyServer.java      ← Java HTTP server + API handlers
-        └── resources/web/
-            ├── index.html               ← UI markup
-            ├── style.css                ← Minimal styling
-            └── app.js                   ← Fetch + convert logic
+src/main/java/com/currencyconverter/
+├── Main.java               ← Entry point
+├── models/
+│   ├── Currency.java
+│   └── ConversionResult.java
+├── services/
+│   └── ExchangeRateService.java
+├── utils/
+│   ├── CurrencyData.java
+│   └── FormatUtils.java
+└── ui/
+    ├── MainFrame.java
+    └── ConverterPanel.java
 ```
 
-## Features
-- **Currency Selection** — choose base and target from 39 currencies
-- **Real-time Rates** — fetched live from open.er-api.com
-- **Amount Input** — any numeric amount, press Enter or click Convert
-- **Currency Conversion** — accurate result using live exchange rate
-- **Display Result** — shows converted amount and the exchange rate used
-- **Swap Button** — instantly swap base ↔ target currencies
+---
+
+## API Used
+
+**Frankfurter** — `https://api.frankfurter.app`  
+Free · Open source · No key required · Backed by the European Central Bank
